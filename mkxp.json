@@ -147,7 +147,7 @@
 
     // The game's frame rate.
     //
-    "fixedFramerate": 61,
+    "fixedFramerate": 60,
 
     // Use a fixed framerate that is approx. equal to the native screen refresh
     // rate. This is different from "fixedFramerate" because the actual frame
