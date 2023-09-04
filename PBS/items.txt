@@ -3803,7 +3803,7 @@ Description = A candy that is packed with energy. It raises the level of a singl
 [MASTERBALL]
 Name = Master Ball
 NamePlural = Master Balls
-Pocket = 2
+Pocket = 1
 Price = 0
 BattleUse = OnFoe
 Flags = PokeBall
@@ -3812,7 +3812,7 @@ Description = The best Ball with the ultimate level of performance. It will catc
 [ULTRABALL]
 Name = Ultra Ball
 NamePlural = Ultra Balls
-Pocket = 2
+Pocket = 1
 Price = 800
 BattleUse = OnFoe
 Flags = PokeBall
@@ -3821,7 +3821,7 @@ Description = An ultra-performance Ball that provides a higher Pokémon catch ra
 [GREATBALL]
 Name = Great Ball
 NamePlural = Great Balls
-Pocket = 2
+Pocket = 1
 Price = 600
 BattleUse = OnFoe
 Flags = PokeBall
@@ -3830,7 +3830,7 @@ Description = A good, high-performance Ball that provides a higher Pokémon catc
 [POKEBALL]
 Name = Poké Ball
 NamePlural = Poké Balls
-Pocket = 2
+Pocket = 1
 Price = 200
 BattleUse = OnFoe
 Flags = PokeBall
@@ -3839,7 +3839,7 @@ Description = A device for catching wild Pokémon. It is thrown like a ball at t
 [SAFARIBALL]
 Name = Safari Ball
 NamePlural = Safari Balls
-Pocket = 2
+Pocket = 1
 Price = 0
 BattleUse = OnFoe
 Flags = PokeBall
@@ -3848,7 +3848,7 @@ Description = A special Poké Ball that is used only in the Safari Zone. It is d
 [SPORTBALL]
 Name = Sport Ball
 NamePlural = Sport Balls
-Pocket = 2
+Pocket = 1
 Price = 300
 BattleUse = OnFoe
 Flags = PokeBall
@@ -3857,7 +3857,7 @@ Description = A special Poké Ball for the Bug-Catching Contest.
 [NETBALL]
 Name = Net Ball
 NamePlural = Net Balls
-Pocket = 2
+Pocket = 1
 Price = 1000
 BattleUse = OnFoe
 Flags = PokeBall
@@ -3866,7 +3866,7 @@ Description = A somewhat different Poké Ball that works especially well on Wate
 [DIVEBALL]
 Name = Dive Ball
 NamePlural = Dive Balls
-Pocket = 2
+Pocket = 1
 Price = 1000
 BattleUse = OnFoe
 Flags = PokeBall
@@ -3875,7 +3875,7 @@ Description = A somewhat different Poké Ball that works especially well on Pok�
 [NESTBALL]
 Name = Nest Ball
 NamePlural = Nest Balls
-Pocket = 2
+Pocket = 1
 Price = 1000
 BattleUse = OnFoe
 Flags = PokeBall
@@ -3884,7 +3884,7 @@ Description = A somewhat different Poké Ball that works especially well on weak
 [REPEATBALL]
 Name = Repeat Ball
 NamePlural = Repeat Balls
-Pocket = 2
+Pocket = 1
 Price = 1000
 BattleUse = OnFoe
 Flags = PokeBall
@@ -3893,7 +3893,7 @@ Description = A somewhat different Poké Ball that works especially well on Pok�
 [TIMERBALL]
 Name = Timer Ball
 NamePlural = Timer Balls
-Pocket = 2
+Pocket = 1
 Price = 1000
 BattleUse = OnFoe
 Flags = PokeBall
@@ -3902,7 +3902,7 @@ Description = A somewhat different Ball that becomes progressively better the mo
 [LUXURYBALL]
 Name = Luxury Ball
 NamePlural = Luxury Balls
-Pocket = 2
+Pocket = 1
 Price = 3000
 BattleUse = OnFoe
 Flags = PokeBall
@@ -3911,7 +3911,7 @@ Description = A comfortable Poké Ball that makes a caught wild Pokémon quickly
 [PREMIERBALL]
 Name = Premier Ball
 NamePlural = Premier Balls
-Pocket = 2
+Pocket = 1
 Price = 200
 SellPrice = 10
 BattleUse = OnFoe
@@ -3921,7 +3921,7 @@ Description = A somewhat rare Poké Ball that has been specially made to commemo
 [DUSKBALL]
 Name = Dusk Ball
 NamePlural = Dusk Balls
-Pocket = 2
+Pocket = 1
 Price = 1000
 BattleUse = OnFoe
 Flags = PokeBall
@@ -3930,7 +3930,7 @@ Description = A somewhat different Poké Ball that makes it easier to catch wild
 [HEALBALL]
 Name = Heal Ball
 NamePlural = Heal Balls
-Pocket = 2
+Pocket = 1
 Price = 300
 BattleUse = OnFoe
 Flags = PokeBall
@@ -3939,7 +3939,7 @@ Description = A remedial Poké Ball that restores the caught Pokémon's HP and e
 [QUICKBALL]
 Name = Quick Ball
 NamePlural = Quick Balls
-Pocket = 2
+Pocket = 1
 Price = 1000
 BattleUse = OnFoe
 Flags = PokeBall
@@ -3948,7 +3948,7 @@ Description = A somewhat different Poké Ball that provides a better catch rate 
 [CHERISHBALL]
 Name = Cherish Ball
 NamePlural = Cherish Balls
-Pocket = 2
+Pocket = 1
 Price = 0
 BattleUse = OnFoe
 Flags = PokeBall
@@ -3957,7 +3957,7 @@ Description = A quite rare Poké Ball that has been specially crafted to commemo
 [FASTBALL]
 Name = Fast Ball
 NamePlural = Fast Balls
-Pocket = 2
+Pocket = 1
 Price = 300
 BattleUse = OnFoe
 Flags = PokeBall
@@ -3966,7 +3966,7 @@ Description = A Poké Ball that makes it easier to catch fast Pokémon.
 [LEVELBALL]
 Name = Level Ball
 NamePlural = Level Balls
-Pocket = 2
+Pocket = 1
 Price = 300
 BattleUse = OnFoe
 Flags = PokeBall
@@ -3975,7 +3975,7 @@ Description = A Poké Ball for catching Pokémon that are a lower level than you
 [LUREBALL]
 Name = Lure Ball
 NamePlural = Lure Balls
-Pocket = 2
+Pocket = 1
 Price = 300
 BattleUse = OnFoe
 Flags = PokeBall
@@ -3984,7 +3984,7 @@ Description = A Poké Ball for catching Pokémon hooked by a Rod when fishing.
 [HEAVYBALL]
 Name = Heavy Ball
 NamePlural = Heavy Balls
-Pocket = 2
+Pocket = 1
 Price = 300
 BattleUse = OnFoe
 Flags = PokeBall
@@ -3993,8 +3993,8 @@ Description = A Poké Ball for catching very heavy Pokémon.
 [LOVEBALL]
 Name = Love Ball
 NamePlural = Love Balls
-Pocket = 2
-Price = 300
+Pocket = 1
+Price = 30
 BattleUse = OnFoe
 Flags = PokeBall
 Description = A Poké Ball for catching Pokémon that are the opposite gender of your Pokémon.
@@ -4002,7 +4002,7 @@ Description = A Poké Ball for catching Pokémon that are the opposite gender of
 [FRIENDBALL]
 Name = Friend Ball
 NamePlural = Friend Balls
-Pocket = 2
+Pocket = 1
 Price = 300
 BattleUse = OnFoe
 Flags = PokeBall
@@ -4011,7 +4011,7 @@ Description = A Poké Ball that makes caught Pokémon more friendly.
 [MOONBALL]
 Name = Moon Ball
 NamePlural = Moon Balls
-Pocket = 2
+Pocket = 1
 Price = 300
 BattleUse = OnFoe
 Flags = PokeBall
@@ -4020,7 +4020,7 @@ Description = A Poké Ball for catching Pokémon that evolve using the Moon Ston
 [DREAMBALL]
 Name = Dream Ball
 NamePlural = Dream Balls
-Pocket = 2
+Pocket = 1
 Price = 300
 BattleUse = OnFoe
 Flags = PokeBall
@@ -4029,7 +4029,7 @@ Description = A somewhat different Poké Ball that makes it easier to catch wild
 [BEASTBALL]
 Name = Beast Ball
 NamePlural = Beast Balls
-Pocket = 2
+Pocket = 1
 Price = 1000
 BattleUse = OnFoe
 Flags = PokeBall
@@ -5257,7 +5257,7 @@ Price = 20
 FieldUse = OnPokemon
 BattleUse = OnPokemon
 Flags = Berry,Fling_10,NaturalGift_POISON_80
-Description = It may be used or held by a Pokémon to heal the user by just 10 HP.
+Description = If held by a Pokémon, it restores the user's HP by 10 or 10% of its maximum HP.
 #-------------------------------
 [PERSIMBERRY]
 Name = Persim Berry
@@ -5286,7 +5286,7 @@ Price = 20
 FieldUse = OnPokemon
 BattleUse = OnPokemon
 Flags = Berry,Fling_10,NaturalGift_PSYCHIC_80
-Description = It may be used or held by a Pokémon to heal the user's HP a little.
+Description = If held by a Pokémon, it restores the user's HP by 25 or 25% of its maximum HP.
 #-------------------------------
 [FIGYBERRY]
 Name = Figy Berry
@@ -6316,7 +6316,7 @@ Pocket = 2
 Price = 0
 FieldUse = Direct
 Flags = KeyItem
-Description = A case for holding coins obtained at the Game Corner. It holds up to 99,999 coins.
+Description = A case for holding Expedition Tokens obtained during Expeditions.
 #-------------------------------
 [POKEFLUTE]
 Name = Poké Flute
