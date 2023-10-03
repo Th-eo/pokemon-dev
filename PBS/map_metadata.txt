@@ -396,3 +396,9 @@ Name = Tiall Region
 Outdoor = true
 MapPosition = 1,13,16
 BattleBack = city
+#-------------------------------
+[079]   # Camp
+Outdoor = true
+ShowArea = true
+Bicycle = true
+BattleBack = city
