@@ -105,7 +105,7 @@
     // window. If false, the game screen will stretch and distort to fill the
     // entire window.
     //
-    // "fixedAspectRatio": true,
+    "fixedAspectRatio": true,
 
     // When resizing the game screen to fit the window, whether to scale up the
     // game screen by an integer amount (as large as the current window size
