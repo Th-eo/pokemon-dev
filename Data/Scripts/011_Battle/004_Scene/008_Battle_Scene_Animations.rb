@@ -146,7 +146,6 @@ class Battle::Scene::Animation::LineupAppear < Battle::Scene::Animation
   def createProcesses
     bar = addSprite(@sprites["partyBar_#{@side}"])
     bar.setVisible(0, true)
-	bar.setSE(0, "Battle ability")
     dir = (@side == 0) ? 1 : -1
     bar.setDelta(0, dir * Graphics.width / 2, 0)
     bar.moveDelta(0, 8, -dir * Graphics.width / 2, 0)
@@ -701,11 +700,7 @@ class Battle::Scene::Animation::PokeballThrowCapture < Battle::Scene::Animation
     end
     delay = ball.totalDuration   # 0 or 7
     # Poké Ball arc animation
-	if @critCapture
-		ball.setSE(delay, "Battle critical catch throw")
-	else
-		ball.setSE(delay, "Battle throw")
-	end
+    ball.setSE(delay, "Battle throw")
     createBallTrajectory(ball, delay, 16,
                          ballStartX, ballStartY, ballMidX, ballMidY, ballEndX, ballEndY)
     ball.setZ(9, batSprite.z + 1)

@@ -385,7 +385,7 @@ def pbGenerateWildPokemon(species, level, isRoamer = false)
   # Give the wild Pokémon a held item
   items = genwildpoke.wildHoldItems
   first_pkmn = $player.first_pokemon
-  chances = [50, 5, 1]
+  chances = [70, 20, 10]
   if first_pkmn
     case first_pkmn.ability_id
     when :COMPOUNDEYES
@@ -401,6 +401,10 @@ def pbGenerateWildPokemon(species, level, isRoamer = false)
     genwildpoke.item = items[1].sample
   elsif itemrnd < (chances[0] + chances[1] + chances[2])
     genwildpoke.item = items[2].sample
+  end
+  if !genwildpoke.item
+    genwildpoke.item = :ORANBERRY
+    genwildpoke.item = :SITRUSBERRY if level >= 20
   end
   # Improve chances of shiny Pokémon with Shiny Charm and battling more of the
   # same species

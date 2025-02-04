@@ -31,15 +31,15 @@ module Settings
   # The maximum number of Pokémon that can be in the party.
   MAX_PARTY_SIZE       = 6
   # The maximum level Pokémon can reach.
-  MAXIMUM_LEVEL        = 100
+  MAXIMUM_LEVEL        = 99
   # The level of newly hatched Pokémon.
-  EGG_LEVEL            = 1
+  EGG_LEVEL            = 5
   # The odds of a newly generated Pokémon being shiny (out of 65536).
-  SHINY_POKEMON_CHANCE = (MECHANICS_GENERATION >= 6) ? 16 : 8
+  SHINY_POKEMON_CHANCE = (MECHANICS_GENERATION >= 6) ? 64 : 8 # 16
   # Whether super shininess is enabled (uses a different shiny animation).
   SUPER_SHINY          = (MECHANICS_GENERATION >= 8)
   # The odds of a wild Pokémon/bred egg having Pokérus (out of 65536).
-  POKERUS_CHANCE       = 3
+  POKERUS_CHANCE       = 12 # 3
   # Whether IVs and EVs are treated as 0 when calculating a Pokémon's stats.
   # IVs and EVs still exist, and are used by Hidden Power and some cosmetic
   # things as normal.
@@ -186,19 +186,18 @@ module Settings
   def self.bag_pocket_names
     return [
       _INTL("Items"),
-      _INTL("Medicine"),
-      _INTL("Poké Balls"),
-      _INTL("TMs & HMs"),
-      _INTL("Berries"),
-      _INTL("Mail"),
-      _INTL("Battle Items"),
       _INTL("Key Items")
+      #_INTL("TMs & HMs"),
+      #_INTL("Berries"),
+      #_INTL("Mail"),
+      #_INTL("Battle Items"),
+      #_INTL("Key Items")
     ]
   end
   # The maximum number of slots per pocket (-1 means infinite number).
-  BAG_MAX_POCKET_SIZE  = [-1, -1, -1, -1, -1, -1, -1, -1]
+  BAG_MAX_POCKET_SIZE  = [10, -1, -1, -1, -1, -1, -1, -1]
   # Whether each pocket in turn auto-sorts itself by item ID number.
-  BAG_POCKET_AUTO_SORT = [false, false, false, true, true, false, false, false]
+  BAG_POCKET_AUTO_SORT = [false, true, true]
   # The maximum number of items each slot in the Bag can hold.
   BAG_MAX_PER_SLOT     = 999
 
@@ -375,59 +374,12 @@ module Settings
 
   # Available speech frames. These are graphic files in "Graphics/Windowskins/".
   SPEECH_WINDOWSKINS = [
-    "speech hgss 1",
-    "speech hgss 2",
-    "speech hgss 3",
-    "speech hgss 4",
-    "speech hgss 5",
-    "speech hgss 6",
-    "speech hgss 7",
-    "speech hgss 8",
-    "speech hgss 9",
-    "speech hgss 10",
-    "speech hgss 11",
-    "speech hgss 12",
-    "speech hgss 13",
-    "speech hgss 14",
-    "speech hgss 15",
-    "speech hgss 16",
-    "speech hgss 17",
-    "speech hgss 18",
-    "speech hgss 19",
-    "speech hgss 20",
-    "speech pl 18"
+    "speech neo 1"
   ]
 
   # Available menu frames. These are graphic files in "Graphics/Windowskins/".
   MENU_WINDOWSKINS = [
-    "choice 1",
-    "choice 2",
-    "choice 3",
-    "choice 4",
-    "choice 5",
-    "choice 6",
-    "choice 7",
-    "choice 8",
-    "choice 9",
-    "choice 10",
-    "choice 11",
-    "choice 12",
-    "choice 13",
-    "choice 14",
-    "choice 15",
-    "choice 16",
-    "choice 17",
-    "choice 18",
-    "choice 19",
-    "choice 20",
-    "choice 21",
-    "choice 22",
-    "choice 23",
-    "choice 24",
-    "choice 25",
-    "choice 26",
-    "choice 27",
-    "choice 28"
+    "choice"
   ]
 
   #=============================================================================
@@ -458,5 +410,5 @@ end
 module Essentials
   VERSION = "21"
   ERROR_TEXT = ""
-  MKXPZ_VERSION = "2.4.2/c9378cf"
+  MKXPZ_VERSION = "2.4.2/ee8dc7e"
 end

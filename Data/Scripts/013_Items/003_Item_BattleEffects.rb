@@ -366,12 +366,17 @@ ItemHandlers::BattleUseOnPokemon.add(:MOOMOOMILK, proc { |item, pokemon, battler
 })
 
 ItemHandlers::BattleUseOnPokemon.add(:ORANBERRY, proc { |item, pokemon, battler, choices, scene|
-  pbBattleHPItem(pokemon, battler, 10, scene)
+  max_hp = pokemon.totalhp
+  heal_amount = [max_hp * 0.1, 10].max.to_i  # Calculate 10% or 10, whichever is higher
+  pbBattleHPItem(pokemon, battler, heal_amount, scene)
 })
 
 ItemHandlers::BattleUseOnPokemon.add(:SITRUSBERRY, proc { |item, pokemon, battler, choices, scene|
-  pbBattleHPItem(pokemon, battler, pokemon.totalhp / 4, scene)
+  max_hp = pokemon.totalhp
+  heal_amount = [max_hp * 0.25, 25].max.to_i  # Calculate 25% or 50, whichever is higher
+  pbBattleHPItem(pokemon, battler, heal_amount, scene)
 })
+
 
 ItemHandlers::BattleUseOnPokemon.add(:AWAKENING, proc { |item, pokemon, battler, choices, scene|
   pokemon.heal_status
@@ -501,7 +506,6 @@ ItemHandlers::BattleUseOnPokemon.add(:REVIVALHERB, proc { |item, pokemon, battle
 ItemHandlers::BattleUseOnPokemon.add(:ETHER, proc { |item, pokemon, battler, choices, scene|
   idxMove = choices[3]
   pbBattleRestorePP(pokemon, battler, idxMove, 10)
-  pbSEPlay("Use item in party")
   scene.pbDisplay(_INTL("PP was restored."))
 })
 
@@ -510,7 +514,6 @@ ItemHandlers::BattleUseOnPokemon.copy(:ETHER, :LEPPABERRY)
 ItemHandlers::BattleUseOnPokemon.add(:MAXETHER, proc { |item, pokemon, battler, choices, scene|
   idxMove = choices[3]
   pbBattleRestorePP(pokemon, battler, idxMove, pokemon.moves[idxMove].total_pp)
-  pbSEPlay("Use item in party")
   scene.pbDisplay(_INTL("PP was restored."))
 })
 
@@ -518,7 +521,6 @@ ItemHandlers::BattleUseOnPokemon.add(:ELIXIR, proc { |item, pokemon, battler, ch
   pokemon.moves.length.times do |i|
     pbBattleRestorePP(pokemon, battler, i, 10)
   end
-  pbSEPlay("Use item in party")
   scene.pbDisplay(_INTL("PP was restored."))
 })
 
@@ -526,7 +528,6 @@ ItemHandlers::BattleUseOnPokemon.add(:MAXELIXIR, proc { |item, pokemon, battler,
   pokemon.moves.length.times do |i|
     pbBattleRestorePP(pokemon, battler, i, pokemon.moves[i].total_pp)
   end
-  pbSEPlay("Use item in party")
   scene.pbDisplay(_INTL("PP was restored."))
 })
 

@@ -16,7 +16,11 @@ module Input
 
   def self.update
     update_KGC_ScreenCapture
-    pbScreenCapture if trigger?(Input::F8)
+    if $DEBUG && trigger?(Input::F8)
+      exportTilesetsTinted
+    elsif trigger?(Input::F8)
+      pbScreenCapture
+    end
   end
 end
 

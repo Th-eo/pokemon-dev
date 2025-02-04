@@ -424,7 +424,7 @@ class Window_AdvancedTextPokemon < SpriteWindow_Base
 
   def allocPause
     return if @pausesprite
-    @pausesprite = AnimatedSprite.create("Graphics/UI/pause_arrow", 4, 3)
+    @pausesprite = AnimatedSprite.create("Graphics/UI/pause_arrow", 1, 3)
     @pausesprite.z       = 100000
     @pausesprite.visible = false
   end
@@ -454,8 +454,8 @@ class Window_AdvancedTextPokemon < SpriteWindow_Base
     when 1   # Lower right
       pauseWidth  = @pausesprite.bitmap ? @pausesprite.framewidth : 16
       pauseHeight = @pausesprite.bitmap ? @pausesprite.frameheight : 16
-      @pausesprite.x = self.x + self.width - 40 + (pauseWidth / 2)
-      @pausesprite.y = self.y + self.height - 60 + (pauseHeight / 2)
+      @pausesprite.x = self.x + self.width - 40 + (pauseWidth / 2) + 0 - 6 +2
+      @pausesprite.y = self.y + self.height - 60 + (pauseHeight / 2) + 0 - 6
     when 2   # Lower middle
       pauseWidth  = @pausesprite.bitmap ? @pausesprite.framewidth : 16
       pauseHeight = @pausesprite.bitmap ? @pausesprite.frameheight : 16
@@ -1158,7 +1158,6 @@ class Window_DrawableCommand < SpriteWindow_SelectableEx
     refresh if self.index != oldindex
   end
 end
-
 #===============================================================================
 #
 #===============================================================================

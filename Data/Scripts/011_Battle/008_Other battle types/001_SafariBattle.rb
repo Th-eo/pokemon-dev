@@ -106,6 +106,7 @@ class Battle::Scene::Animation::ThrowBait < Battle::Scene::Animation
     ballPos = Battle::Scene.pbBattlerPosition(@battler.index, batSprite.sideSize)
     ballStartX = traSprite.x
     ballStartY = traSprite.y - (traSprite.bitmap.height / 2)
+    print(ballStartX, ballStartY)
     ballMidX   = 0   # Unused in arc calculation
     ballMidY   = 122
     ballEndX   = ballPos[0] - 40
@@ -472,7 +473,6 @@ class SafariBattle
         # End of round
         if @decision == 0
           if @ballCount <= 0
-			pbSEPlay("Safari Zone end")
             pbDisplay(_INTL("PA: You have no Safari Balls left! Game over!"))
             @decision = 2
           elsif pbRandom(100) < 5 * escapeFactor

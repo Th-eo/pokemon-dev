@@ -37,8 +37,8 @@ class PokemonTrainerCard_Scene
   def pbDrawTrainerCardFront
     overlay = @sprites["overlay"].bitmap
     overlay.clear
-    baseColor   = Color.new(72, 72, 72)
-    shadowColor = Color.new(160, 160, 160)
+    baseColor   = MessageConfig::DARK_TEXT_SHADOW_COLOR
+    shadowColor = MessageConfig::DARK_TEXT_SHADOW_COLOR
     totalsec = $stats.play_time.to_i
     hour = totalsec / 60 / 60
     min = totalsec / 60 % 60

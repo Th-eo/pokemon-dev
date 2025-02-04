@@ -201,6 +201,11 @@ class Battle::Move
       elsif target.effects[PBEffects::Endure]
         target.damageState.endured = true
         damage -= 1
+      # Bluk Berry
+      elsif target.effects[PBEffects::BlukBerry] >= 1
+        target.damageState.endured = true
+        damage -= 1
+        target.effects[PBEffects::BlukBerry] = 0
       elsif damage == target.totalhp
         if target.hasActiveAbility?(:STURDY) && !@battle.moldBreaker
           target.damageState.sturdy = true

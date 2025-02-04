@@ -24,6 +24,8 @@ class Game_Event < Game_Character
     @through      = true
     @to_update    = true
     @tempSwitches = {}
+    @time = 0
+    @dir = 0
     moveto(@event.x, @event.y) if map
     refresh
   end
@@ -84,6 +86,20 @@ class Game_Event < Game_Character
       return $game_switches[id]
     end
   end
+  
+  def stumpActive?
+    return nil if !$PokemonGlobal.eventvars
+    return true if $PokemonGlobal.eventvars[[@map_id, @event.id]]
+  end
+  
+  def getVariable(*arg)
+    if arg.length == 0
+      return nil if !$PokemonGlobal.eventvars
+      return $PokemonGlobal.eventvars[[@map_id, @event_id]]
+    else
+      return $game_variables[arg[0]]
+    end
+  end
 
   def variable
     return nil if !$PokemonGlobal.eventvars
@@ -92,6 +108,10 @@ class Game_Event < Game_Character
 
   def setVariable(variable)
     $PokemonGlobal.eventvars[[@map_id, @event.id]] = variable
+  end
+  
+  def variableMinus(variable)
+    $PokemonGlobal.eventvars[[@map_id, @event.id]] -= variable
   end
 
   def varAsInt
@@ -239,6 +259,8 @@ class Game_Event < Game_Character
     @interpreter          = nil
     @interpreter          = Interpreter.new if @trigger == 4   # Parallel Process
     check_event_trigger_auto
+    
+   
   end
 
   def should_update?(recalc = false)
@@ -262,6 +284,24 @@ class Game_Event < Game_Character
     @updated_last_frame = true
     @moveto_happened = false
     last_moving = moving?
+    
+     if @character_name.include?("Unown") || @character_name.include?("Mew")
+      
+      #@time = rand(0..999) if @time == 0
+      @time += 1
+  
+      amplitude = 20
+      frequency = 0.075
+      speed_factor = 0.7
+  
+      speed = 1 - Math.sin(@time * frequency * 0.5) * speed_factor
+    
+      raw_y_offset = (-amplitude * speed).round
+      @y_offset = raw_y_offset + (2 - raw_y_offset % 2)
+     
+    end
+
+    
     super
     $game_player.pbCheckEventTriggerFromDistance([2]) if !moving? && last_moving
     if @need_refresh
@@ -273,6 +313,7 @@ class Game_Event < Game_Character
       @interpreter.setup(@list, @event.id, @map_id) if !@interpreter.running?
       @interpreter.update
     end
+    
   end
 
   def update_move

@@ -138,7 +138,7 @@ class Sprite_Character < RPG::Sprite
     end
     @character.sprite_size = [@cw, @ch]
   end
-
+  
   def update
     return if @character.is_a?(Game_Event) && !@character.should_update?
     super
@@ -161,10 +161,17 @@ class Sprite_Character < RPG::Sprite
       self.oy -= @character.bob_height
     end
     if self.visible
-      if @character.is_a?(Game_Event) && @character.name[/regulartone/i]
+      if @character.is_a?(Game_Event) && @character.name[/door/i]
+        #puts "#{@character.name}"
+        #pbDayNightTint(self)
+        puts "#{self.tone}"
+        tone = PBDayNight.getTone
+        self.tone.set(tone.red, tone.green, tone.blue, tone.gray)
+        puts "#{self.tone}"
+      elsif @character.is_a?(Game_Event) && @character.name[/regulartone/i]
         self.tone.set(0, 0, 0, 0)
       else
-        pbDayNightTint(self)
+        #pbDayNightTint(self)
       end
     end
     this_x = @character.screen_x

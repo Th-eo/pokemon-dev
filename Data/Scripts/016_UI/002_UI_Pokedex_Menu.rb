@@ -74,7 +74,7 @@ class PokemonPokedexMenu_Scene
         break
       elsif Input.trigger?(Input::USE)
         ret = @sprites["commands"].index
-        (ret == @commands.length - 1) ? pbPlayCloseMenuSE : pbSEPlay("GUI pokedex open")
+        (ret == @commands.length - 1) ? pbPlayCloseMenuSE : pbPlayDecisionSE
         break
       end
     end

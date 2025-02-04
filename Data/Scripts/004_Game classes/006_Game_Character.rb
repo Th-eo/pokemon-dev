@@ -327,7 +327,7 @@ class Game_Character
     ret += self.y_offset
     return ret
   end
-
+  
   def screen_z(height = 0)
     return 999 if @always_on_top
     z = screen_y_ground

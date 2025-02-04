@@ -18,8 +18,8 @@ module PBDayNight
     Tone.new(-40, -50, -35, 50),   # Day/morning
     Tone.new(-40, -50, -35, 50),   # Day/morning     # 6AM
     Tone.new(-40, -50, -35, 50),   # Day/morning
-    Tone.new(-40, -50, -35, 50),   # Day/morning
-    Tone.new(-20, -25, -15, 20),   # Day/morning
+    Tone.new(-40, -50, -35, 50),   # Day/morning THIS
+    Tone.new(-20, -25, -15, 20),   # Day/morning THIS
     Tone.new(  0,   0,   0,  0),   # Day
     Tone.new(  0,   0,   0,  0),   # Day
     Tone.new(  0,   0,   0,  0),   # Day             # Noon
@@ -29,11 +29,11 @@ module PBDayNight
     Tone.new(  0,   0,   0,  0),   # Day/afternoon
     Tone.new(  0,   0,   0,  0),   # Day/afternoon
     Tone.new( -5, -30, -20,  0),   # Day/evening     # 6PM
-    Tone.new(-15, -60, -10, 20),   # Day/evening
+    Tone.new(-15, -60, -10, 20),   # Day/evening THIS
     Tone.new(-15, -60, -10, 20),   # Day/evening
     Tone.new(-40, -75,   5, 40),   # Night
     Tone.new(-70, -90,  15, 55),   # Night
-    Tone.new(-70, -90,  15, 55)    # Night
+    Tone.new(-70, -90,  15, 55)    # Night THIS
   ]
   CACHED_TONE_LIFETIME = 30   # In seconds; recalculates overworld tone once per this time
   @cachedTone = nil
@@ -80,6 +80,7 @@ module PBDayNight
   # Gets a Tone object representing a suggested shading
   # tone for the current time of day.
   def self.getTone
+    #return Tone.new(  0,   0,   0,  0)
     @cachedTone = Tone.new(0, 0, 0) if !@cachedTone
     return @cachedTone if !Settings::TIME_SHADING
     if !@dayNightToneLastUpdate || (System.uptime - @dayNightToneLastUpdate >= CACHED_TONE_LIFETIME)
@@ -107,6 +108,7 @@ module PBDayNight
     @cachedTone.green = ((nexthourtone.green - tone.green) * minute * @oneOverSixty) + tone.green
     @cachedTone.blue  = ((nexthourtone.blue - tone.blue) * minute * @oneOverSixty) + tone.blue
     @cachedTone.gray  = ((nexthourtone.gray - tone.gray) * minute * @oneOverSixty) + tone.gray
+    #@cachedTone = Tone.new(  0,   0,   0,  0)
   end
 end
 
@@ -114,7 +116,9 @@ end
 #
 #===============================================================================
 def pbDayNightTint(object)
+  #return
   return if !$scene.is_a?(Scene_Map)
+  return if object.is_a?(TilemapRenderer)
   if Settings::TIME_SHADING && $game_map.metadata&.outdoor_map
     tone = PBDayNight.getTone
     object.tone.set(tone.red, tone.green, tone.blue, tone.gray)

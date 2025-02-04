@@ -11,6 +11,8 @@ class PokemonPauseMenu_Scene
     @sprites["cmdwindow"].viewport = @viewport
     @sprites["infowindow"] = Window_UnformattedTextPokemon.newWithSize("", 0, 0, 32, 32, @viewport)
     @sprites["infowindow"].visible = false
+    @sprites["timewindow"] = Window_UnformattedTextPokemon.newWithSize("", 0, 0, 32, 32, @viewport)
+    @sprites["timewindow"].visible = false
     @sprites["helpwindow"] = Window_UnformattedTextPokemon.newWithSize("", 0, 0, 32, 32, @viewport)
     @sprites["helpwindow"].visible = false
     @infostate = false
@@ -24,6 +26,21 @@ class PokemonPauseMenu_Scene
     @sprites["infowindow"].visible = true
     @infostate = true
   end
+  
+  def pbShowTime
+    hour = pbGetTimeNow.hour
+    ampm = "AM"
+    ampm = "PM" if pbGetTimeNow.hour>=12
+    hour = pbGetTimeNow.hour-12 if pbGetTimeNow.hour>=13
+    week=pbGetTimeNow.strftime("%A")
+    #time=[_ISPRINTF("{4:s} {1:02d}:{2:02d} {3:s}", hour, pbGetTimeNow.min, ampm, week)].to_s
+    time = [_ISPRINTF(pbGetTimeNow.strftime("%I:%M %p"))].to_s
+    time = time.gsub(/[\[\]"]/,'').strip
+    @sprites["timewindow"].resizeToFit(time, Graphics.height)
+    @sprites["timewindow"].text    = time
+    @sprites["timewindow"].visible = true
+    @timestate = true
+  end
 
   def pbShowHelp(text)
     @sprites["helpwindow"].resizeToFit(text, Graphics.height)
@@ -36,12 +53,14 @@ class PokemonPauseMenu_Scene
   def pbShowMenu
     @sprites["cmdwindow"].visible = true
     @sprites["infowindow"].visible = @infostate
+    @sprites["timewindow"].visible = @timestate
     @sprites["helpwindow"].visible = @helpstate
   end
 
   def pbHideMenu
     @sprites["cmdwindow"].visible = false
     @sprites["infowindow"].visible = false
+    @sprites["timewindow"].visible = false
     @sprites["helpwindow"].visible = false
   end
 
@@ -70,6 +89,10 @@ class PokemonPauseMenu_Scene
     end
     return ret
   end
+  
+  def refreshTime
+    pbShowTime
+  end
 
   def pbEndScene
     pbDisposeSpriteHash(@sprites)
@@ -93,6 +116,10 @@ class PokemonPauseMenu
   end
 
   def pbShowInfo; end
+    
+  def pbShowTime
+    @scene.pbShowTime
+  end
 
   def pbStartPokemonMenu
     if !$player
@@ -105,6 +132,7 @@ class PokemonPauseMenu
     @scene.pbStartScene
     # Show extra info window if relevant
     pbShowInfo
+    pbShowTime
     # Get all commands
     command_list = []
     commands = []

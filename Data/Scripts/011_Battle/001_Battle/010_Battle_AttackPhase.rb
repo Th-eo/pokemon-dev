@@ -48,6 +48,9 @@ class Battle
   def pbAttackPhaseSwitch
     pbPriority.each do |b|
       next unless @choices[b.index][0] == :SwitchOut && !b.fainted?
+      if $game_switches[76]
+        idxNewPkmn = @choices[b.index][1] 
+      end
       idxNewPkmn = @choices[b.index][1]   # Party index of Pokémon to switch to
       b.lastMoveFailed = false   # Counts as a successful move for Stomping Tantrum
       @lastMoveUser = b.index

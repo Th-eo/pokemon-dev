@@ -31,13 +31,17 @@ class Battle::Scene
     messageBox.z = 195
     # Create message window (displays the message)
     msgWindow = Window_AdvancedTextPokemon.newWithSize(
-      "", 16, Graphics.height - 96 + 2, Graphics.width - 32, 96, @viewport
+      "", 0, Graphics.height - 96, # pos
+      Graphics.width, 96, @viewport # size
     )
     msgWindow.z              = 200
-    msgWindow.opacity        = 0
+    msgWindow.opacity        = 255
     msgWindow.baseColor      = MESSAGE_BASE_COLOR
     msgWindow.shadowColor    = MESSAGE_SHADOW_COLOR
     msgWindow.letterbyletter = true
+    skinfile = MessageConfig.pbGetSpeechFrame
+    msgWindow.setSkin(skinfile)
+#    puts "#{skinfile}"
     @sprites["messageWindow"] = msgWindow
     # Create command window
     @sprites["commandWindow"] = CommandMenu.new(@viewport, 200)
@@ -129,7 +133,7 @@ class Battle::Scene
     battleBG   = "Graphics/Battlebacks/" + backdropFilename + "_bg"
     playerBase = "Graphics/Battlebacks/" + baseFilename + "_base0"
     enemyBase  = "Graphics/Battlebacks/" + baseFilename + "_base1"
-    messageBG  = "Graphics/Battlebacks/" + messageFilename + "_message"
+    messageBG  = "Graphics/Battlebacks/message" #+ messageFilename + "_message"
     # Apply graphics
     bg = pbAddSprite("battle_bg", 0, 0, battleBG, @viewport)
     bg.z = 0

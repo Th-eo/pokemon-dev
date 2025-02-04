@@ -717,6 +717,8 @@ class Battle
       battler.effects[PBEffects::CounterTarget]    = -1
       battler.effects[PBEffects::Electrify]        = false
       battler.effects[PBEffects::Endure]           = false
+      # Bluk Berry
+      battler.effects[PBEffects::BlukBerry]        -= 1 if battler.effects[PBEffects::BlukBerry] > 0
       battler.effects[PBEffects::FirstPledge]      = nil
       battler.effects[PBEffects::Flinch]           = false
       battler.effects[PBEffects::FocusPunch]       = false

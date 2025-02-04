@@ -83,6 +83,15 @@ module Battle::CatchAndStoreMixin
     @caughtPokemon.each do |pkmn|
       pbSetCaught(pkmn)
       pbSetSeen(pkmn)   # In case the form changed upon leaving battle
+      
+      # Check if the captured Pokémon is an Unown
+      if pkmn.species == :UNOWN
+        # Get the Unown form and store it in the Game Variable array
+        unown_form = pkmn.form
+        $game_variables[32] ||= []  # Initialize the array if not already done
+        $game_variables[32] << unown_form unless $game_variables[32].include?(unown_form)
+      end
+    
       # Record the Pokémon's species as owned in the Pokédex
       if !pbPlayer.owned?(pkmn.species)
         pbPlayer.pokedex.set_owned(pkmn.species)
@@ -99,7 +108,7 @@ module Battle::CatchAndStoreMixin
     end
     @caughtPokemon.clear
   end
-
+  
   #=============================================================================
   # Throw a Poké Ball
   #=============================================================================
@@ -166,6 +175,9 @@ module Battle::CatchAndStoreMixin
         pbGainExp
         battler.captured = false
       end
+      if $game_variables[27][4] == true
+        pbItemDrop(battler.item) if battler.item
+      end
       battler.pbReset
       if pbAllFainted?(battler.index)
         @decision = (trainerBattle?) ? 1 : 4   # Battle ended by win/capture
@@ -206,6 +218,14 @@ module Battle::CatchAndStoreMixin
       catch_rate = Battle::PokeBallEffects.modifyCatchRate(ball, catch_rate, self, battler)
     else
       catch_rate /= 10
+    end
+    # Razz raises by 33%
+    if $game_variables[27][0] == true
+      catch_rate *= 1.33
+    end
+    # Nanab restores to 100% (in case Razz was used too) and then lowers by 50%
+    if $game_variables[27][2] == true
+      catch_rate = catch_rate = Battle::PokeBallEffects.modifyCatchRate(ball, catch_rate, self, battler)*0.5
     end
     # First half of the shakes calculation
     a = battler.totalhp

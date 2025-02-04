@@ -119,6 +119,7 @@ def pbBattleAnimation(bgm = nil, battletype = 0, foe = nil)
         anim = "FourBallBurst"
       end
     end
+    #anim = "vsunown" if $game_variables[28] != ""
     pbBattleAnimationCore(anim, viewport, location)
   end
   pbPushFade

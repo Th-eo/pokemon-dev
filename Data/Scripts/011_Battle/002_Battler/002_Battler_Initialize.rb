@@ -172,6 +172,8 @@ class Battle::Battler
     @effects[PBEffects::Encore]              = 0
     @effects[PBEffects::EncoreMove]          = nil
     @effects[PBEffects::Endure]              = false
+    # Bluk Berry
+    @effects[PBEffects::BlukBerry]           = 0
     @effects[PBEffects::ExtraType]           = nil
     @effects[PBEffects::FirstPledge]         = nil
     @effects[PBEffects::FlashFire]           = false

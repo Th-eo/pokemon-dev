@@ -213,9 +213,9 @@ HiddenMoveHandlers::UseMove.add(:CUT, proc { |move, pokemon|
 def pbSmashEvent(event)
   return if !event
   if event.name[/cuttree/i]
-    pbSEPlay("Cut")
+    pbSEPlay("Cut", 80)
   elsif event.name[/smashrock/i]
-    pbSEPlay("Rock Smash")
+    pbSEPlay("Rock Smash", 80)
   end
   pbMoveRoute(event, [PBMoveRoute::WAIT, 2,
                       PBMoveRoute::TURN_LEFT, PBMoveRoute::WAIT, 2,
@@ -516,8 +516,6 @@ HiddenMoveHandlers::UseMove.add(:FLY, proc { |move, pkmn|
 # Headbutt
 #===============================================================================
 def pbHeadbuttEffect(event = nil)
-  pbSEPlay("Headbutt")
-  pbWait(1.0)
   event = $game_player.pbFacingEvent(true) if !event
   a = (event.x + (event.x / 24).floor + 1) * (event.y + (event.y / 24).floor + 1)
   a = (a * 2 / 5) % 10   # Even 2x as likely as odd, 0 is 1.5x as likely as odd
@@ -799,9 +797,8 @@ def pbSweetScent
   viewport.color.green = 32
   viewport.color.blue  = 32
   viewport.color.alpha -= 10
-  pbSEPlay("Sweet Scent")
   start_alpha = viewport.color.alpha
-  duration = 2.0
+  duration = 1.1
   fade_time = 0.4
   pbWait(duration) do |delta_t|
     if delta_t < duration / 2
@@ -811,7 +808,6 @@ def pbSweetScent
     end
   end
   viewport.dispose
-  pbSEStop(0.5)
   enctype = $PokemonEncounters.encounter_type
   if !enctype || !$PokemonEncounters.encounter_possible_here? ||
      !pbEncounter(enctype, false)

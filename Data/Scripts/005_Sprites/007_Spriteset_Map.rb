@@ -48,6 +48,10 @@ class Spriteset_Map
   def self.viewport
     return @@viewport1
   end
+  
+  def viewport3
+    return @@viewport3
+  end
 
   def initialize(map = nil)
     @map = (map) ? map : $game_map
@@ -112,8 +116,10 @@ class Spriteset_Map
     @@viewport1.ox = 0
     @@viewport1.oy = 0
     @@viewport1.ox += $game_screen.shake
-    @panorama.ox = tmox / 2
-    @panorama.oy = tmoy / 2
+    #@panorama.ox = tmox / 2
+    #@panorama.oy = tmoy / 2
+    @panorama.ox +=2 if Graphics.frame_count % 120
+    @panorama.oy +=2 if Graphics.frame_count % 120
     @fog.ox         = tmox + @map.fog_ox
     @fog.oy         = tmoy + @map.fog_oy
     @fog.zoom_x     = @map.fog_zoom / 100.0

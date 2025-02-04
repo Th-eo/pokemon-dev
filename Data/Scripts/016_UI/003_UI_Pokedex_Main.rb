@@ -1054,7 +1054,7 @@ class PokemonPokedex_Scene
         break
       elsif Input.trigger?(Input::USE)
         if index == -2      # OK
-          pbSEPlay("GUI pokedex open")
+          pbPlayDecisionSE
           ret = selindex
           break
         elsif index == -3   # Cancel
@@ -1177,7 +1177,7 @@ class PokemonPokedex_Scene
         pbPlayCloseMenuSE
         break
       elsif Input.trigger?(Input::USE)
-        pbSEPlay("GUI pokedex open") if index != 9
+        pbPlayDecisionSE if index != 9
         case index
         when 0   # Choose sort order
           newparam = pbDexSearchCommands(0, [params[0]], index)
@@ -1264,12 +1264,11 @@ class PokemonPokedex_Scene
           pbRefresh
         end
         if Input.trigger?(Input::ACTION)
-          pbSEPlay("GUI pokedex open")
+          pbPlayDecisionSE
           @sprites["pokedex"].active = false
           pbDexSearch
           @sprites["pokedex"].active = true
         elsif Input.trigger?(Input::BACK)
-		pbPlayCloseMenuSE
           if @searchResults
             pbPlayCancelSE
             pbCloseSearch

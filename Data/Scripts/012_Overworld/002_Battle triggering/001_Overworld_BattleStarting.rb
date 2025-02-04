@@ -353,6 +353,7 @@ end
 class WildBattle
   # Used when walking in tall grass, hence the additional code.
   def self.start(*args, can_override: false)
+    $game_variables[27] = [false, false, false, false, false] # berries used
     foe_party = WildBattle.generate_foes(*args)
     # Potentially call a different WildBattle.start-type method instead (for
     # roaming Pokémon, Safari battles, Bug Contest battles)

@@ -269,8 +269,8 @@ class TilemapRenderer
     @tiles_vertical_count   = (Graphics.height.to_f / DISPLAY_TILE_HEIGHT).ceil + 1
     @tone                   = Tone.new(0, 0, 0, 0)
     @old_tone               = Tone.new(0, 0, 0, 0)
-    @color                  = Color.new(0, 0, 0, 0)
-    @old_color              = Color.new(0, 0, 0, 0)
+    @color                  = Color.new(255, 255, 255, 255)#Color.new(0, 0, 0, 0)
+    @old_color              = Color.new(255, 255, 255, 255)#Color.new(0, 0, 0, 0)
     @self_viewport          = Viewport.new(0, 0, Graphics.width, Graphics.height)
     @viewport               = (viewport) ? viewport : @self_viewport
     @old_viewport_ox        = 0

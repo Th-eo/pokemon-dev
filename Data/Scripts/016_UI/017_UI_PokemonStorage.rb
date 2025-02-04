@@ -110,7 +110,7 @@ end
 #
 #===============================================================================
 class AutoMosaicPokemonSprite < MosaicPokemonSprite
-  INITIAL_MOSAIC = 10   # Pixellation factor
+  INITIAL_MOSAIC = 15   # Pixellation factor
 
   def mosaic=(value)
     @mosaic = value

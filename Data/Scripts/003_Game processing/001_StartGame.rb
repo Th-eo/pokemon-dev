@@ -74,6 +74,7 @@ module Game
 
   # Loads and validates the map. Called when loading a saved game.
   def self.load_map
+    $loading=true
     $game_map = $map_factory.map
     magic_number_matches = ($game_system.magic_number == $data_system.magic_number)
     if !magic_number_matches || $PokemonGlobal.safesave
@@ -101,6 +102,7 @@ module Game
     $PokemonEncounters = PokemonEncounters.new
     $PokemonEncounters.setup($game_map.map_id)
     pbUpdateVehicle
+    $loading=false
   end
 
   # Saves the game. Returns whether the operation was successful.

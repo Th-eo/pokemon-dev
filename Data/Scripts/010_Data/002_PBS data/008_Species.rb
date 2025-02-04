@@ -48,7 +48,7 @@ module GameData
 
     extend ClassMethodsSymbols
     include InstanceMethods
-
+    
     def self.schema(compiling_forms = false)
       ret = {}
       if compiling_forms

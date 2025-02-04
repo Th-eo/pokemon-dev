@@ -365,23 +365,31 @@ Battle::ItemEffects::HPHeal.add(:ORANBERRY,
   proc { |item, battler, battle, forced|
     next false if !battler.canHeal?
     next false if !forced && !battler.canConsumePinchBerry?(false)
-    amt = 10
+    
+    max_hp = battler.totalhp
+    heal_amount = [max_hp * 0.1, 10].max.to_i  # Calculate 10% or 10, whichever is higher
+    
     ripening = false
     if battler.hasActiveAbility?(:RIPEN)
       battle.pbShowAbilitySplash(battler, forced)
-      amt *= 2
+      heal_amount *= 2
       ripening = true
     end
+    
     battle.pbCommonAnimation("EatBerry", battler) if !forced
     battle.pbHideAbilitySplash(battler) if ripening
-    battler.pbRecoverHP(amt)
+    
+    battler.pbRecoverHP(heal_amount)
+    
     itemName = GameData::Item.get(item).name
     if forced
       PBDebug.log("[Item triggered] Forced consuming of #{itemName}")
+      puts "#{heal_amount}"
       battle.pbDisplay(_INTL("{1}'s HP was restored.", battler.pbThis))
     else
       battle.pbDisplay(_INTL("{1} restored a little HP using its {2}!", battler.pbThis, itemName))
     end
+    
     next true
   }
 )
@@ -402,16 +410,22 @@ Battle::ItemEffects::HPHeal.add(:SITRUSBERRY,
   proc { |item, battler, battle, forced|
     next false if !battler.canHeal?
     next false if !forced && !battler.canConsumePinchBerry?(false)
-    amt = battler.totalhp / 4
+    
+    max_hp = battler.totalhp
+    heal_amount = [max_hp * 0.25, 25].max.to_i  # Calculate 25% or 50, whichever is higher
+    
     ripening = false
     if battler.hasActiveAbility?(:RIPEN)
       battle.pbShowAbilitySplash(battler, forced)
-      amt *= 2
+      heal_amount *= 2
       ripening = true
     end
+    
     battle.pbCommonAnimation("EatBerry", battler) if !forced
     battle.pbHideAbilitySplash(battler) if ripening
-    battler.pbRecoverHP(amt)
+    
+    battler.pbRecoverHP(heal_amount)
+    
     itemName = GameData::Item.get(item).name
     if forced
       PBDebug.log("[Item triggered] Forced consuming of #{itemName}")
@@ -419,6 +433,7 @@ Battle::ItemEffects::HPHeal.add(:SITRUSBERRY,
     else
       battle.pbDisplay(_INTL("{1} restored its health using its {2}!", battler.pbThis, itemName))
     end
+    
     next true
   }
 )

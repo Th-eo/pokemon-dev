@@ -353,6 +353,15 @@ class Interpreter
       return $game_variables[arg[0]]
     end
   end
+  
+  def variable
+    return nil if !$PokemonGlobal.eventvars
+    return $PokemonGlobal.eventvars[[@map_id, @event_id]]
+  end
+  
+  def variableMinus(variable)
+    $PokemonGlobal.eventvars[[@map_id, @event.id]] -= variable
+  end
 
   def setVariable(*arg)
     if arg.length == 1
@@ -381,7 +390,7 @@ class Interpreter
   end
 
   # Used in boulder events. Allows an event to be pushed.
-  def pbPushThisEvent(strength = false)
+  def pbPushThisEvent
     event = get_self
     old_x  = event.x
     old_y  = event.y
@@ -397,7 +406,6 @@ class Interpreter
     end
     $PokemonMap&.addMovedEvent(@event_id)
     if old_x != event.x || old_y != event.y
-	  pbSEPlay("Strength push") if strength
       $game_player.lock
       loop do
         Graphics.update
@@ -410,7 +418,7 @@ class Interpreter
   end
 
   def pbPushThisBoulder
-    pbPushThisEvent(true) if $PokemonMap.strengthUsed
+    pbPushThisEvent if $PokemonMap.strengthUsed
     return true
   end
 

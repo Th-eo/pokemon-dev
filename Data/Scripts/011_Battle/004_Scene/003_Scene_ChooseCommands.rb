@@ -15,6 +15,8 @@ class Battle::Scene
     ret = pbCommandMenuEx(idxBattler, cmds, (shadowTrainer) ? 2 : (firstAction) ? 0 : 1)
     ret = 4 if ret == 3 && shadowTrainer   # Convert "Run" to "Call"
     ret = -1 if ret == 3 && !firstAction   # Convert "Run" to "Cancel"
+    cm = @sprites["commandWindow"]
+    #cm.refresh
     return ret
   end
 
@@ -46,6 +48,8 @@ class Battle::Scene
       pbPlayCursorSE if cw.index != oldIndex
       # Actions
       if Input.trigger?(Input::USE)                 # Confirm choice
+#        puts "this happend"
+        cw.animate
         pbPlayDecisionSE
         ret = cw.index
         @lastCmd[idxBattler] = ret
@@ -68,6 +72,8 @@ class Battle::Scene
   def pbFightMenu(idxBattler, megaEvoPossible = false)
     battler = @battle.battlers[idxBattler]
     cw = @sprites["fightWindow"]
+    cm = @sprites["commandWindow"]
+    
     cw.battler = battler
     moveIndex = 0
     if battler.moves[@lastMove[idxBattler]]&.id
@@ -108,11 +114,14 @@ class Battle::Scene
       # Actions
       if Input.trigger?(Input::USE)      # Confirm choice
         pbPlayDecisionSE
+        cw.animate
+        #cm.refresh
         break if yield cw.index
         needFullRefresh = true
         needRefresh = true
       elsif Input.trigger?(Input::BACK)   # Cancel fight menu
         pbPlayCancelSE
+        #cm.refresh
         break if yield -1
         needRefresh = true
       elsif Input.trigger?(Input::ACTION)   # Toggle Mega Evolution
@@ -186,6 +195,8 @@ class Battle::Scene
     end
     # Close party screen
     switchScreen.pbEndScene
+    cm = @sprites["commandWindow"]
+    #cm.refresh
     # Fade back into battle screen
     pbFadeInAndShow(@sprites, visibleSprites)
   end
@@ -207,7 +218,7 @@ class Battle::Scene
     end
     # Start Bag screen
     itemScene = PokemonBag_Scene.new
-    itemScene.pbStartScene($bag, true,
+    itemScene.pbStartScene($bag, false,
                            proc { |item|
                              useType = GameData::Item.get(item).battle_use
                              next useType && useType > 0
@@ -319,6 +330,8 @@ class Battle::Scene
     $bag.last_pocket_selections = oldChoices
     # Close Bag screen
     itemScene.pbEndScene
+    cm = @sprites["commandWindow"]
+    #cm.refresh
     # Fade back into battle screen (if not already showing it)
     pbFadeInAndShow(@sprites, visibleSprites) if !wasTargeting
   end

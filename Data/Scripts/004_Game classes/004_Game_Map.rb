@@ -45,7 +45,8 @@ class Game_Map
   def setup(map_id)
     @map_id = map_id
     @map = load_data(sprintf("Data/Map%03d.rxdata", map_id))
-    tileset = $data_tilesets[@map.tileset_id]
+    self.refresh_tilesets
+    tileset = $data_tilesets[@cached_tileset]
     updateTileset
     @fog_ox                  = 0
     @fog_oy                  = 0
@@ -60,6 +61,7 @@ class Game_Map
     self.display_y           = 0
     @need_refresh            = false
     EventHandlers.trigger(:on_game_map_setup, map_id, @map, tileset)
+    
     @events                  = {}
     @map.events.each_key do |i|
       @events[i]             = Game_Event.new(@map_id, @map.events[i], self)
@@ -74,7 +76,15 @@ class Game_Map
   end
 
   def updateTileset
-    tileset = $data_tilesets[@map.tileset_id]
+    #new_tileset = $game_variables[30]
+    #if new_tileset > 0 && $game_map.name.include?("Grotto")
+    #  tileset = $data_tilesets[new_tileset]
+    #else
+    #  tileset = $data_tilesets[@map.tileset_id]
+    #end
+    # puts "#{new_tileset}, #{@map.tileset_id}"
+    self.refresh_tilesets
+    tileset = $data_tilesets[@cached_tileset]
     @tileset_name    = tileset.tileset_name
     @autotile_names  = tileset.autotile_names
     @panorama_name   = tileset.panorama_name
@@ -91,6 +101,10 @@ class Game_Map
     @priorities      = tileset.priorities
     @terrain_tags    = tileset.terrain_tags
   end
+  
+  #def tileset_name
+  #  return $data_tilesets[@map.tileset_id].tileset_name
+  #end
 
   def width;          return @map.width;          end
   def height;         return @map.height;         end
@@ -439,6 +453,7 @@ class Game_Map
   def update
     uptime_now = System.uptime
     play_now = $stats.play_time
+    self.refresh_tilesets
     # Refresh maps if necessary
     if $map_factory
       $map_factory.maps.each { |i| i.refresh if i.need_refresh }

@@ -314,7 +314,7 @@ end
 def pbDisplayGoldWindow(msgwindow)
   moneyString = pbGetGoldString
   goldwindow = Window_AdvancedTextPokemon.new(_INTL("Money:\n<ar>{1}</ar>", moneyString))
-  goldwindow.setSkin("Graphics/Windowskins/goldskin")
+  goldwindow.setSkin("Graphics/Windowskins/choice")
   goldwindow.resizeToFit(goldwindow.text, Graphics.width)
   goldwindow.width = 160 if goldwindow.width <= 160
   if msgwindow.y == 0
@@ -325,6 +325,18 @@ def pbDisplayGoldWindow(msgwindow)
   goldwindow.viewport = msgwindow.viewport
   goldwindow.z = msgwindow.z
   return goldwindow
+end
+
+def pbDisplayItemCountWindow(msgwindow, item)
+  quantity = $bag.quantity(item)
+  itemwindow = Window_AdvancedTextPokemon.new(_INTL("x{1}", quantity))
+  itemwindow.setSkin("Graphics/Windowskins/choice")
+  itemwindow.resizeToFit(itemwindow.text, Graphics.width)
+  itemwindow.width = 160 if itemwindow.width <= 160
+  itemwindow.y=msgwindow.y-itemwindow.height
+  itemwindow.viewport = msgwindow.viewport
+  itemwindow.z = msgwindow.z
+  return itemwindow
 end
 
 def pbDisplayCoinsWindow(msgwindow, goldwindow)

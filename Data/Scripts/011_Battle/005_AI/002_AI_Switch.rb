@@ -118,7 +118,7 @@ class Battle::AI
         score -= 20 if pokemon_can_be_poisoned?(pkmn)
       end
       # Sticky Web
-      if @user.pbOwnSide.effects[PBEffects::StickyWeb]
+      if @user.pbOwnSide.effects[PBEffects::ToxicSpikes]
         score -= 15
       end
     end

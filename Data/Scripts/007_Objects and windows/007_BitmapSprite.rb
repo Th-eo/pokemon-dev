@@ -28,7 +28,11 @@ class AnimatedSprite < Sprite
   attr_reader :frameheight
   attr_reader :framecount
   attr_reader :animname
-
+  
+  def initialY=(value)
+    @initial_y = value
+  end
+  
   # frameskip is in 1/20ths of a second, and is the time between frame changes.
   def initializeLong(animname, framecount, framewidth, frameheight, frameskip)
     @animname = pbBitmapName(animname)
@@ -57,6 +61,10 @@ class AnimatedSprite < Sprite
     self.src_rect.width = @framewidth
     self.src_rect.height = @frameheight
     self.frame = 0
+    @saved = false
+    @time=0
+    #@initial_y = self.y
+    
   end
 
   # Shorter version of AnimationSprite. All frames are placed on a single row
@@ -83,6 +91,8 @@ class AnimatedSprite < Sprite
     self.src_rect.width = @framewidth
     self.src_rect.height = @frameheight
     self.frame = 0
+    @saved = false
+    @time=0
   end
 
   def initialize(*args)
@@ -93,6 +103,18 @@ class AnimatedSprite < Sprite
       super(args[5])
       initializeLong(args[0], args[1], args[2], args[3], args[4])
     end
+    if args[0][0].include?("pause_arrow") && @child_sprite.nil?
+        @child_sprite = IconSprite.new(0, 0, viewport)
+        @child_sprite.setBitmap("Graphics/UI/cursor_shadow")
+        @child_sprite.x = 235*2 + 16 + 2 # Adjust the child sprite's position as needed
+        @child_sprite.y = 179*2 + 6 # Adjust the child sprite's position as needed
+        @child_sprite.z = 99999
+        @child_sprite.ox = @child_sprite.width / 2
+        @child_sprite.oy = @child_sprite.height / 2
+        @child_sprite.opacity = 200
+    else
+        @child_sprite = nil
+      end
   end
 
   def self.create(animname, framecount, frameskip, viewport = nil)
@@ -103,10 +125,18 @@ class AnimatedSprite < Sprite
     return if disposed?
     @animbitmap.dispose
     @animbitmap = nil
+    @child_sprite.dispose if @child_sprite
+    @child_sprite = nil
     super
+  end
+  
+  def isChild?
+    return true if @animname.include?("shadow")
+    return false 
   end
 
   def playing?
+    return false if isChild?
     return @playing
   end
 
@@ -128,9 +158,43 @@ class AnimatedSprite < Sprite
 
   def update
     super
+    @time += 1
+    @child_sprite.update if @child_sprite
     if @playing
+      if @saved == false
+        @initialY = self.y
+        @saved = true
+      end
       new_frame = (System.uptime / @time_per_frame).to_i % self.framecount
       self.frame = new_frame if self.frame != new_frame
+    end
+    wave_amplitude = 12  # Adjust this to control the height of the wave
+    wave_frequency = 0.1  # Adjust this to control the speed of the wave
+    zoom_amplitude = 0.5  # Adjust this to control the amount of zoom
+    zoom_frequency = 1  # Adjust this to control the speed of the zoom
+  
+    raw_y = wave_amplitude * Math.sin(@time * wave_frequency)
+    
+    # Counter for the zoom animation
+    zoom_frame_counter = (@time * zoom_frequency * 20).to_i % 20  # 20 frames for the animation
+  
+    if @child_sprite != nil && @time.even?
+      shrinkage_factor = 0.9  # Adjust this to control the amount of shrinkage
+      
+      # Calculate zoom factor based on the animation counter
+      #if zoom_frame_counter <= 10
+      #  zoom_factor = 1.0 - shrinkage_factor * (raw_y.abs / wave_amplitude) * (zoom_frame_counter / 10.0)
+      #else
+      #  zoom_factor = 1.0 - shrinkage_factor * (raw_y.abs / wave_amplitude) * ((20 - zoom_frame_counter) / 10.0)
+      #end
+      
+      #@child_sprite.zoom_x = zoom_factor
+      #@child_sprite.zoom_y = zoom_factor
+    end
+  
+    # Apply animation logic only to the parent sprite
+    if @playing && self != @child_sprite
+      self.y = (@initialY + raw_y).to_i.even? ? @initialY + raw_y : @initialY + raw_y + 1
     end
   end
 end

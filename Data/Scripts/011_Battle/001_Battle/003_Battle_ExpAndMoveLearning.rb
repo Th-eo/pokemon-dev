@@ -70,6 +70,10 @@ class Battle
     if pkmn.pokerusStage >= 1   # Infected or cured
       evYield.each_key { |stat| evYield[stat] *= 2 }
     end
+    # Triple EV gain because of Wepear Berry
+    if $game_variables[27][3]==true  
+      evYield.each_key { |stat| evYield[stat] *= 3 }
+    end
     # Gain EVs for each stat in turn
     if pkmn.shadowPokemon? && pkmn.heartStage <= 3 && pkmn.saved_ev
       pkmn.saved_ev.each_value { |e| evTotal += e }
@@ -90,6 +94,7 @@ class Battle
   end
 
   def pbGainExpOne(idxParty, defeatedBattler, numPartic, expShare, expAll, showMessages = true)
+    usedBerry = $game_variables[27]
     pkmn = pbParty(0)[idxParty]   # The Pokémon gaining Exp from defeatedBattler
     growth_rate = pkmn.growth_rate
     # Don't bother calculating if gainer is already at max Exp
@@ -163,7 +168,7 @@ class Battle
     return if expGained <= 0
     # "Exp gained" message
     if showMessages
-      if isOutsider
+      if isOutsider || usedBerry[3]==true
         pbDisplayPaused(_INTL("{1} got a boosted {2} Exp. Points!", pkmn.name, expGained))
       else
         pbDisplayPaused(_INTL("{1} got {2} Exp. Points!", pkmn.name, expGained))
@@ -214,7 +219,7 @@ class Battle
       pkmn.calc_stats
       battler&.pbUpdate(false)
       @scene.pbRefreshOne(battler.index) if battler
-      pbDisplayPaused(_INTL("{1} grew to Lv. {2}!", pkmn.name, curLevel)) { pbSEPlay("Pkmn level up") }
+      pbDisplayPaused(_INTL("{1} grew to Lv. {2}!", pkmn.name, curLevel))
       @scene.pbLevelUp(pkmn, battler, oldTotalHP, oldAttack, oldDefense,
                        oldSpAtk, oldSpDef, oldSpeed)
       # Learn all moves learned at this level
